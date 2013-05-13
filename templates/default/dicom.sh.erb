@@ -20,6 +20,6 @@
 # Example:
 #DICOM="/opt/local/eja-dicom/eja-storescp -pm -aet bfs.cmrr.lan -od /export/raid2/dicom-data/stage -ss ACC 10104"
 
-DICOM="<%= @install_path %>/eja-dicom-distro/eja-storescp -pm -aet <%= @aet %> -od <%= @output_directory %> -ss ACC <%= @port %>"
+DICOM="<%= @install_root %>/<%= @install_dirname %>/eja-storescp -pm -aet <%= @aet %> -od <%= @output_directory %> -ss ACC <%= @port %>"
 
 $DICOM >> <%= @logfile %> 2>&1 &

@@ -1,9 +1,11 @@
 default[:eja_dicom][:port] = 10104
 default[:eja_dicom][:output_directory] = "/opt/dicom_output"
+default[:eja_dicom][:output_directory_mode] = 00640
 default[:eja_dicom][:aet] = "eja_dicom"
 default[:eja_dicom][:logfile] = "/var/log/eja-dicom.log"
-default[:eja_dicom][:install_path] = "/opt"
-default[:eja_dicom][:script_location] = "#{node[:eja_dicom][:install_path]}/eja-dicom-distro/dicom.sh"
+default[:eja_dicom][:install_root] = "/opt"
+default[:eja_dicom][:install_dirname] = "eja-dicom"
+default[:eja_dicom][:script_location] = "#{node[:eja_dicom][:install_root]}/#{node[:eja_dicom][:install_dirname]}/dicom.sh"
 default[:eja_dicom][:user] = "dicom"
 default[:eja_dicom][:group] = "dicom"
 default[:eja_dicom][:source] = "http://www.cmrr.umn.edu/~bdhanna/eja-dicom-distro.tgz"
