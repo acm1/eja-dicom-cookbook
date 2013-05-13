@@ -1,0 +1,33 @@
+#!/bin/sh
+##
+## Sat Dec 21 17:19:57 CST 1996 CT
+## Start/Stop eja-dicom storescp server
+##
+# chkconfig: 2345 99 99 
+# description: Starts and stops eja-dicom storescp server
+
+# Note: change settings in dicom.sh, not here.
+# Seemed to work better to execute the process as another user when using an external script.
+#DICOM="/opt/local/eja-dicom/eja-storescp -pm -aet bfs.cmrr.lan -od /export/raid2/dicom-data/stage -ss ACC 10104"
+
+case "$1" in
+'start')
+	echo "Starting DICOM (eja-dicom) service" 
+	echo `date` Starting eja-dicom >> <%= @logfile %>
+
+        su <%= @user %> -c "<%= @script_location %>"
+        ;;
+'stop')
+        echo "Stopping the DICOM (eja-dicom) service."
+
+	PID=`ps -ef | grep 'eja-[s]torescp' | awk '{print $2}'`
+	if [ -n "$PID" ]; then
+		echo `date` Killing eja-dicom >> <%= @logfile %>
+        	kill $PID
+	fi
+
+        ;;
+*)
+        echo "Usage: /etc/init.d/dicom { start | stop }"
+        ;;
+esac

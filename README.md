@@ -1,4 +1,4 @@
-# dicom cookbook
+# eja_dicom cookbook
 
 # Requirements
 
