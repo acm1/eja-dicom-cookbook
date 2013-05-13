@@ -13,7 +13,7 @@ The attributes used by this cookbook are under the 'eja_dicom' namespace.
 |-----------------|-------------|-----|--------|
 port|The listening port for the dicom server|Fixnum|10104
 output_directory|The directory where the dicom server will store images it receives|String|/opt/dicom_output
-output_directory_mode|The octal unix permission mode of the output_directory|Fixnum|00640
+output_directory_mode|The octal unix permission mode of the output_directory|Fixnum|00750
 aet|The Application Entity Name of this dicom server. Set as appropriate for your environment|String|eja_dicom
 logfile|The log file for the dicom server|String|/var/log/eja-dicom.log
 install_root|The base directory where the eja-dicom software subdirectory will be created|String|/opt
