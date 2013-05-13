@@ -24,8 +24,8 @@ group|The group name that the dicom server will run as and that the output_direc
 source|The URL source for the eja-dicom distro.|String|http://www.cmrr.umn.edu/~bdhanna/eja-dicom-distro.tgz
 
 # Recipes
-- default:: Installs and starts the eja-dicom server.
-- ubuntu-precise-amd64:: Install libraries required to run the eja-dicom software on 64-bit Ubuntu Precise
+- default: Installs and starts the eja-dicom server.
+- ubuntu-precise-amd64: Install libraries required to run the eja-dicom software on 64-bit Ubuntu Precise
 
 # Author
 
