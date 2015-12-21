@@ -5,9 +5,15 @@
 # Copyright (C) 2013 Adam Mielke, (C) Regents of the University of Minnesota
 # 
 
-# If this is a 64-bit Ubuntu Precise machine, install required libraries first
-if node[:platform] == "ubuntu" and node[:platform_version] == "12.04" and node[:kernel][:machine] =~ /x86_64/
+# If this is a 64-bit Ubuntu Precise or Trusty machine, install required libraries first
+if node[:platform] == "ubuntu"
+  if node[:platform_version] == "12.04" and node[:kernel][:machine] =~ /x86_64/
 	include_recipe "#{cookbook_name}::ubuntu-precise-amd64"
+  elsif node[:platform_version] == "14.04" and node[:kernel][:machine] =~ /x86_64/
+        include_recipe "#{cookbook_name}::ubuntu-trusty-amd64" 
+  else
+	Chef::Application.fatal!("Cookbook not implemented for #{node[:platform]} #{node[:platform_version}. Please update the cookbook.")
+  end
 end
 
 group node[:eja_dicom][:group] do
