@@ -1,7 +1,8 @@
 # eja_dicom cookbook
 
 # Requirements
-Ubuntu Precise (12.04) LTS 64-bit is the only OS that has been tested.
+64-bit OS
+Ubuntu 12.04 LTS or Ubuntu 14.04 LTS
 
 # Usage
 Include the default recipe to install and start the dicom service from the eja-dicom package. Set attributes as required for your installation. See the attributes heading below.
