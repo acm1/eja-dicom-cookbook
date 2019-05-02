@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# based on storescp, modified for Siemens data sets
+# for more info, see: https://support.dcmtk.org/docs/storescp.html
+
+# Go to the same directory this script is in
+cd <%= @bin_dir %>
+#cd `dirname $0`
+
+# Run the eja-dicom program that is there
+# Modify as needed:
+# -aet application entity title (case sensitive sometimes)
+# -od outputdirectory
+# -lf logfile
+# 4444 port number (standard is 104, root required for port < 1024)
+
+#./eja-dicom -pm -aet MYTITLE -od /data/dicom -sa -lf /var/log/eja-dicom.log +xa 4444 &
+./eja-dicom -pm -aet <%= @aet %> -od <%= @output_directory %> -sa -lf <%= @logfile %> +xa <%= @port %> &
+
+

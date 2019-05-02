@@ -3,31 +3,49 @@
 ## Sat Dec 21 17:19:57 CST 1996 CT
 ## Start/Stop eja-dicom storescp server
 ##
-# chkconfig: 2345 99 99 
+# chkconfig: 2345 99 99
 # description: Starts and stops eja-dicom storescp server
 
-# Note: change settings in dicom.sh, not here.
-# Seemed to work better to execute the process as another user when using an external script.
-#DICOM="/opt/local/eja-dicom/eja-storescp -pm -aet bfs.cmrr.lan -od /export/raid2/dicom-data/stage -ss ACC 10104"
+# BIN_DIR is the path where the server binary is stored
+BIN_DIR="<%= @bin_dir %>"
+
+# BIN_NAME is the exact filename of the server binary
+BIN_NAME="<%= @bin_name %>"
+
+# AE_TITLE is the desired application entity title of the server
+AE_TITLE="<%= @aet %>"
+
+# OUTPUT_DIR is the root directory where the incoming files will be stored
+OUTPUT_DIR="<%= @output_directory %>"
+
+# LISTEN_PORT is the desired TCP port of the server (normally 104)
+LISTEN_PORT="<%= @port %>"
+
+# LOGFILE is the full pathname for the server log file
+LOGFILE="<%= @logfile %>"
+
+DICOM="${BIN_DIR}/${BIN_NAME} -pm -aet ${AE_TITLE} -od ${OUTPUT_DIR} -sp -lf ${LOGFILE} ${LISTEN_PORT}"
 
 case "$1" in
 'start')
-	echo "Starting DICOM (eja-dicom) service" 
-	echo `date` Starting eja-dicom >> <%= @logfile %>
+    echo "Starting the DICOM (eja-dicom) service..."
+    echo `date` Starting eja-dicom >> $LOGFILE
 
-        su <%= @user %> -c "<%= @script_location %>"
-        ;;
+    $DICOM &
+    ;;
 'stop')
-        echo "Stopping the DICOM (eja-dicom) service."
+    echo "Stopping the DICOM (eja-dicom) service..."
 
-	PID=`ps -ef | grep 'eja-[s]torescp' | awk '{print $2}'`
-	if [ -n "$PID" ]; then
-		echo `date` Killing eja-dicom >> <%= @logfile %>
-        	kill $PID
-	fi
-
-        ;;
+    PID=`ps -ef | grep ${BIN_NAME} | grep -v grep | grep -v ps | awk '{print $2}'`
+    if [ -n "$PID" ]; then
+        echo " * Killing DICOM (eja-dicom) process with PID ${PID}"
+        echo `date` Killing eja-dicom >> $LOGFILE
+        kill $PID
+    else
+        echo " * DICOM (eja-dicom) process not found!"
+    fi
+    ;;
 *)
-        echo "Usage: /etc/init.d/dicom { start | stop }"
-        ;;
+    echo "Usage: /etc/init.d/dicom { start | stop }"
+    ;;
 esac

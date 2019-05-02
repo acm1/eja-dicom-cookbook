@@ -1,0 +1,12 @@
+[Unit]
+Description=Start dicom listener 
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=<%= @startup_script %>
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target
+

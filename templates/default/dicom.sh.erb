@@ -8,7 +8,7 @@
 #       Set to directory where dicom directories and data files are stored. Must be writable by the dicom user.
 #       This script is run by root, but executes this script as the dicom user. Files end up owned by this user.
 #       To change the user this runs as, see the dicom startup script.
-#       
+#
 # -ss ACC 10104
 #       Listen for connections on port 10104. Connections coming from the CMRR 3T trio.cmrr.umn.edu 160.94.152.50
 #       must be able to pass the inbound port-filtering network and host firewalls, if any.
@@ -20,6 +20,6 @@
 # Example:
 #DICOM="/opt/local/eja-dicom/eja-storescp -pm -aet bfs.cmrr.lan -od /export/raid2/dicom-data/stage -ss ACC 10104"
 
-DICOM="<%= @install_root %>/<%= @install_dirname %>/eja-storescp -pm -aet <%= @aet %> -od <%= @output_directory %> -ss ACC <%= @port %>"
+DICOM="<%= @bin_dir %>/<% @bin_name %> -pm -aet <%= @aet %> -od <%= @output_directory %> -ss ACC <%= @port %>"
 
 $DICOM >> <%= @logfile %> 2>&1 &

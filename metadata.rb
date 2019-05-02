@@ -4,8 +4,7 @@ maintainer_email "adam@umn.edu"
 license          "All rights reserved"
 description      "Installs/Configures eja-dicom receiver"
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "1.0.2"
+version          "1.0.3"
 
-depends          "ark"
-
-supports         "ubuntu", ">= 12.04"
+supports         "ubuntu", ">= 14.04"
+supports         "centos", ">= 7.0"
