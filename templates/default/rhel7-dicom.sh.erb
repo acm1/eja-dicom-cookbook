@@ -1,5 +1,9 @@
 #!/bin/sh
 
+################################################################################
+## This file is managed by Chef - local changes will be overwritten
+#################################################################################
+
 # based on storescp, modified for Siemens data sets
 # for more info, see: https://support.dcmtk.org/docs/storescp.html
 
@@ -15,6 +19,6 @@ cd <%= @bin_dir %>
 # 4444 port number (standard is 104, root required for port < 1024)
 
 #./eja-dicom -pm -aet MYTITLE -od /data/dicom -sa -lf /var/log/eja-dicom.log +xa 4444 &
-./eja-dicom -pm -aet <%= @aet %> -od <%= @output_directory %> -sa -lf <%= @logfile %> +xa <%= @port %> &
+./eja-dicom -pm -aet <%= @aet %> -od <%= @output_directory %> -sp -lf <%= @logfile %> +xa <%= @port %> &
 
 
